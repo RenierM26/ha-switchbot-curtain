@@ -3,7 +3,7 @@
   "name": "SwitchBot Curtain",
   "version": "0.1.2",
   "documentation": "https://www.home-assistant.io/integrations/switchbot-curtain",
-  "requirements": ["SB_password_patch @ git+https://github.com/RenierM26/pySwitchbot.git@SB_password_patch"],
+  "requirements": ["PySwitchbot==0.12.0"],
   "config_flow": true,
   "codeowners": ["@danielhiversen", "@alextud"],
   "iot_class": "local_polling"
