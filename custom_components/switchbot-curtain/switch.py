@@ -8,8 +8,8 @@ from switchbot import Switchbot  # pylint: disable=import-error
 import voluptuous as vol
 
 from homeassistant.components.switch import (
-    DEVICE_CLASS_SWITCH,
     PLATFORM_SCHEMA,
+    SwitchDeviceClass,
     SwitchEntity,
 )
 from homeassistant.config_entries import SOURCE_IMPORT, ConfigEntry
@@ -49,6 +49,12 @@ async def async_setup_platform(
     discovery_info: DiscoveryInfoType | None = None,
 ) -> None:
     """Import yaml config and initiates config flow for Switchbot devices."""
+    _LOGGER.warning(
+        "Configuration of the Switchbot switch platform in YAML is deprecated and "
+        "will be removed in Home Assistant 2022.4; Your existing configuration "
+        "has been imported into the UI automatically and can be safely removed "
+        "from your configuration.yaml file"
+    )
 
     # Check if entry config exists and skips import if it does.
     if hass.config_entries.async_entries(DOMAIN):
@@ -99,7 +105,7 @@ class SwitchBotBotEntity(SwitchbotEntity, SwitchEntity, RestoreEntity):
     """Representation of a Switchbot."""
 
     coordinator: SwitchbotDataUpdateCoordinator
-    _attr_device_class = DEVICE_CLASS_SWITCH
+    _attr_device_class = SwitchDeviceClass.SWITCH
 
     def __init__(
         self,
@@ -117,8 +123,7 @@ class SwitchBotBotEntity(SwitchbotEntity, SwitchEntity, RestoreEntity):
     async def async_added_to_hass(self) -> None:
         """Run when entity about to be added."""
         await super().async_added_to_hass()
-        last_state = await self.async_get_last_state()
-        if not last_state:
+        if not (last_state := await self.async_get_last_state()):
             return
         self._attr_is_on = last_state.state == STATE_ON
         self._last_run_success = last_state.attributes["last_run_success"]
