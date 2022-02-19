@@ -3,7 +3,7 @@
   "name": "SwitchBot Curtain",
   "version": "0.1.2",
   "documentation": "https://www.home-assistant.io/integrations/switchbot-curtain",
-  "requirements": ["pySwitchbot_fix_no_conn_exceptions @ git+https://github.com/RenierM26/pySwitchbot.git@pySwitchbot_fix_no_conn_exceptions"],
+  "requirements": ["pyswitchbot_timeout @ git+https://github.com/RenierM26/pySwitchbot.git@pyswitchbot_timeout"],
   "config_flow": true,
   "codeowners": ["@danielhiversen", "@alextud"],
   "iot_class": "local_polling"
