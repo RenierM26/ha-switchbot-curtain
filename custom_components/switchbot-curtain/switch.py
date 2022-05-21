@@ -134,9 +134,7 @@ class SwitchBotBotEntity(SwitchbotEntity, SwitchEntity, RestoreEntity):
         _LOGGER.info("Turn Switchbot bot on %s", self._mac)
 
         async with self.coordinator.api_lock:
-            self._last_run_success = bool(
-                await self.hass.async_add_executor_job(self._device.turn_on)
-            )
+            self._last_run_success = bool(await self._device.turn_on())
             if self._last_run_success:
                 self._attr_is_on = True
                 self.async_write_ha_state()
@@ -146,9 +144,7 @@ class SwitchBotBotEntity(SwitchbotEntity, SwitchEntity, RestoreEntity):
         _LOGGER.info("Turn Switchbot bot off %s", self._mac)
 
         async with self.coordinator.api_lock:
-            self._last_run_success = bool(
-                await self.hass.async_add_executor_job(self._device.turn_off)
-            )
+            self._last_run_success = bool(await self._device.turn_off())
             if self._last_run_success:
                 self._attr_is_on = False
                 self.async_write_ha_state()
