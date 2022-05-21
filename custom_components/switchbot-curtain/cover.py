@@ -96,21 +96,24 @@ class SwitchBotCurtainEntity(SwitchbotEntity, CoverEntity, RestoreEntity):
 
         _LOGGER.debug("Switchbot to open curtain %s", self._mac)
 
-        self._last_run_success = bool(await self._device.open())
+        async with self.coordinator.api_lock:
+            self._last_run_success = bool(await self._device.open())
 
     async def async_close_cover(self, **kwargs: Any) -> None:
         """Close the curtain."""
 
         _LOGGER.debug("Switchbot to close the curtain %s", self._mac)
 
-        self._last_run_success = bool(await self._device.close())
+        async with self.coordinator.api_lock:
+            self._last_run_success = bool(await self._device.close())
 
     async def async_stop_cover(self, **kwargs: Any) -> None:
         """Stop the moving of this device."""
 
         _LOGGER.debug("Switchbot to stop %s", self._mac)
 
-        self._last_run_success = bool(await self._device.stop())
+        async with self.coordinator.api_lock:
+            self._last_run_success = bool(await self._device.stop())
 
     async def async_set_cover_position(self, **kwargs: Any) -> None:
         """Move the cover shutter to a specific position."""
@@ -118,7 +121,8 @@ class SwitchBotCurtainEntity(SwitchbotEntity, CoverEntity, RestoreEntity):
 
         _LOGGER.debug("Switchbot to move at %d %s", position, self._mac)
 
-        self._last_run_success = bool(await self._device.set_position(position))
+        async with self.coordinator.api_lock:
+            self._last_run_success = bool(await self._device.set_position(position))
 
     @callback
     def _handle_coordinator_update(self) -> None:
