@@ -3,7 +3,7 @@
   "name": "SwitchBot Curtain",
   "version": "0.1.2",
   "documentation": "https://www.home-assistant.io/integrations/switchbot-curtain",
-  "requirements": ["bleak_api_conversion @ git+https://github.com/RenierM26/pySwitchbot@bleak_api_conversion"],
+  "requirements": ["pySwitchbot @ git+https://github.com/RenierM26/pySwitchbot.git@bleak_api_conversion"],
   "config_flow": true,
   "codeowners": ["@danielhiversen", "@alextud"],
   "iot_class": "local_polling"
