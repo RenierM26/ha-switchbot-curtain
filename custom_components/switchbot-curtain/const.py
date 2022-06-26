@@ -1,5 +1,5 @@
 """Constants for the switchbot integration."""
-DOMAIN = "switchbot-curtain"
+DOMAIN = "switchbot"
 MANUFACTURER = "switchbot"
 
 # Config Attributes
