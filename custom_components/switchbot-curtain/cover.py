@@ -16,6 +16,7 @@ from homeassistant.components.cover import (
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_MAC, CONF_NAME, CONF_PASSWORD
 from homeassistant.core import HomeAssistant, callback
+from homeassistant.exceptions import PlatformNotReady
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.restore_state import RestoreEntity
 
@@ -35,6 +36,9 @@ async def async_setup_entry(
     coordinator: SwitchbotDataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id][
         DATA_COORDINATOR
     ]
+
+    if not coordinator.data.get(entry.unique_id):
+        raise PlatformNotReady
 
     async_add_entities(
         [

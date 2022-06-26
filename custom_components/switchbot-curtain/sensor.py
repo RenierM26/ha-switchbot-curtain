@@ -14,6 +14,7 @@ from homeassistant.const import (
     SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
 )
 from homeassistant.core import HomeAssistant
+from homeassistant.exceptions import PlatformNotReady
 from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
@@ -54,7 +55,7 @@ async def async_setup_entry(
     ]
 
     if not coordinator.data.get(entry.unique_id):
-        return
+        raise PlatformNotReady
 
     async_add_entities(
         [
