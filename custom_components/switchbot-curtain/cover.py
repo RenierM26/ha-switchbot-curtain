@@ -97,7 +97,8 @@ class SwitchBotCurtainEntity(SwitchbotEntity, CoverEntity, RestoreEntity):
 
         async with self.coordinator.api_lock:
             self._last_run_success = bool(await self._device.open())
-            self.async_write_ha_state()
+
+        self.async_write_ha_state()
 
     async def async_close_cover(self, **kwargs: Any) -> None:
         """Close the curtain."""
@@ -106,7 +107,8 @@ class SwitchBotCurtainEntity(SwitchbotEntity, CoverEntity, RestoreEntity):
 
         async with self.coordinator.api_lock:
             self._last_run_success = bool(await self._device.close())
-            self.async_write_ha_state()
+
+        self.async_write_ha_state()
 
     async def async_stop_cover(self, **kwargs: Any) -> None:
         """Stop the moving of this device."""
@@ -115,7 +117,8 @@ class SwitchBotCurtainEntity(SwitchbotEntity, CoverEntity, RestoreEntity):
 
         async with self.coordinator.api_lock:
             self._last_run_success = bool(await self._device.stop())
-            self.async_write_ha_state()
+
+        self.async_write_ha_state()
 
     async def async_set_cover_position(self, **kwargs: Any) -> None:
         """Move the cover shutter to a specific position."""
@@ -125,7 +128,8 @@ class SwitchBotCurtainEntity(SwitchbotEntity, CoverEntity, RestoreEntity):
 
         async with self.coordinator.api_lock:
             self._last_run_success = bool(await self._device.set_position(position))
-            self.async_write_ha_state()
+
+        self.async_write_ha_state()
 
     @callback
     def _handle_coordinator_update(self) -> None:

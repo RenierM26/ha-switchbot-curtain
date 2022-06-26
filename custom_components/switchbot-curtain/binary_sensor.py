@@ -33,7 +33,7 @@ async def async_setup_entry(
         DATA_COORDINATOR
     ]
 
-    if not coordinator.data[entry.unique_id].get("data"):
+    if not coordinator.data.get(entry.unique_id):
         return
 
     async_add_entities(
